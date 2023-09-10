@@ -1,0 +1,6 @@
+[submodule "LocalisationCore"]
+	path = LocalisationCore
+	url = https://github.com/AnthonyMellon/LocalisationCore.git
+[submodule "DebugCore"]
+	path = DebugCore
+	url = https://github.com/AnthonyMellon/DebugCore.git
