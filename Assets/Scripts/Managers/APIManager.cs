@@ -2,31 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEditor;
+using System.Net.Http;
 
-public class APIManager : MonoBehaviour
-{ 
-    public void APICall(string url)
+public class APIManager
+{
+    private static HttpClient JsonSource = new HttpClient()
     {
-        StartCoroutine(GetRequest(url));
-    }
-    public IEnumerator GetRequest(string url)
+        BaseAddress = new System.Uri(GAConstants.ApiURL),
+    };
+
+    [MenuItem("CardGame/GetJSON")]
+    private static async void DownloadJSON()
     {
-        UnityWebRequest uwr = UnityWebRequest.Get(url);
+        string result;
 
-        yield return uwr.SendWebRequest();
+        //TODO: iterate through all pages somehow
+        result = await JsonSource.GetStringAsync($"{JsonSource.BaseAddress}1");
 
-        if (uwr.isNetworkError)
-        {
-            Debug.Log($"Error is {uwr.error}");
-        }
-        else
-        {
-            OnResponse(uwr.downloadHandler.text);
-        }
-    }
-
-    public virtual void OnResponse(string response)
-    {
-        
+        //TODO: create the cards too
+        Debug.Log(result);
     }
 }
