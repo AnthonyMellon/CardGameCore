@@ -12,13 +12,12 @@ public class APIManager
         BaseAddress = new System.Uri(GAConstants.ApiURL),
     };
 
-    [MenuItem("CardGame/GetJSON")]
-    private static async void DownloadJSON()
+    public static async void DownloadJSON(int page)
     {
         string result;
 
         //TODO: iterate through all pages somehow
-        result = await JsonSource.GetStringAsync($"{JsonSource.BaseAddress}1");
+        result = await JsonSource.GetStringAsync($"{JsonSource.BaseAddress}{page}");
 
         //TODO: create the cards too
         Debug.Log(result);
